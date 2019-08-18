@@ -1,29 +1,90 @@
 <template>
     <div>
         <h1>Модифицированная Шкала Пирс-Харрис</h1>
-        <form>
+        <form v-if="questions.length !== 0">
             <ul>
-                <ranged-quizz-line
-                        v-bind:phraseOne="'aa'"
-                        v-bind:phraseTwo="'bb'"
-                        v-bind:questionId="1"
+                <ranged-quizz-line v-for="qst in this.questions"
+                        v-bind:phraseOne="qst.phraseOne"
+                        v-bind:phraseTwo="qst.phraseTwo"
+                        v-bind:questionId="qst._id"
                 />
             </ul>
+
+            <button v-on:click.prevent="sendResults">Send</button>
         </form>
+        <div v-else>
+            <div class="red">Извините, проблемы с получением информации о данном квизе!</div>
+            <div>Но вы можете посмотреть, как работает диапазонный квиз на примере ниже</div>
+            <form>
+                <ul>
+                    <ranged-quizz-line v-for="item in getRange"
+                            v-bind:phraseOne="'фраза1 вопрос'+item"
+                            v-bind:phraseTwo="'фраза2 вопрос'+item"
+                    />
+                </ul>
+            </form>
+        </div>
     </div>
 </template>
 
 <script>
-    
+
 
     export default {
         name: 'Harris',
-        created() {
+        data() {
+            return {
+                name: 'Оценка качества жизни',
+                questions: [],
+                url: 'https://feed-service.scopicsoftware.com/answer',
+                person_id: Number,
+            }
+        },
+        computed: {
+            getRange() {
+                Array.range = (start, end) => Array.from({length: (end - start)}, (v, k) => k + start);
 
+                return Array.range(1, 10);
+            }
+        },
+        created() {
+            let vm = this;
+            // Fetch our array of posts from an API
+            fetch(this.$data.url)
+                .then(function (response) {
+                    return response.json()
+                })
+                .then(function (data) {
+                    vm.$data.name = data.name;
+                    vm.$data.questions = data.questions;
+                    vm.$data.person_id = data.person_id;
+                })
+        },
+        methods: {
+            sendResults() {
+                const requester = new Request(this.data.url, {
+                    method: 'POST',
+                    body: ''
+                });
+
+                alert('Sent! You\'ll be redirected.');
+                window.location.href = '/#';
+            }
         }
     }
 </script>
 
 <style scoped>
-
+    .red {
+        background-color: red;
+        color: white;
+    }
+    ul {
+        padding-inline-start: 0;
+    }
+    .row {
+        padding-bottom: 5px;
+        border-bottom: 1px lightgray solid;
+        padding-top: 5px;
+    }
 </style>

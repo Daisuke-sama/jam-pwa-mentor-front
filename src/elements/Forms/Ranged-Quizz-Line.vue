@@ -28,9 +28,6 @@
 
                 return Array.range(-3,3);
             }
-        },
-        created() {
-
         }
     }
 </script>
