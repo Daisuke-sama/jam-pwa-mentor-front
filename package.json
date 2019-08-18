@@ -1,0 +1,11 @@
+{
+  "name": "jam-pwa-mentor",
+  "version": "0.0.1",
+  "description": "The app for finding pairs of mentors and mentees.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Pavel Burylichau",
+  "license": "MIT"
+}
