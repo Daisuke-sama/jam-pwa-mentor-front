@@ -24,8 +24,25 @@ spec:
     - mountPath: /var/run/docker.sock
       name: dockersock
       readOnly: false
+  - name: kubectl
+    image: roffe/kubectl
+    command:
+    - cat
+    tty: true
+    volumeMounts:
+    - mountPath: "/root/.kube"
+      name: kubectl-jenkins
+      readOnly: true
   volumes:
     - name: dockersock
       hostPath:
         path: /var/run/docker.sock
+    - name: kubectl-jenkins
+      secret:
+        defaultMode: 420
+        secretName: kubectl-jenkins
+        items:
+        - key: config
+          path: config
+        optional: false
 
