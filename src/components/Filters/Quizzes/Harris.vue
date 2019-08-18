@@ -4,9 +4,9 @@
         <form v-if="questions.length !== 0">
             <ul>
                 <ranged-quizz-line v-for="qst in this.questions"
-                        v-bind:phraseOne="qst.phraseOne"
-                        v-bind:phraseTwo="qst.phraseTwo"
-                        v-bind:questionId="qst._id"
+                                   v-bind:phraseOne="qst.phraseOne"
+                                   v-bind:phraseTwo="qst.phraseTwo"
+                                   v-bind:questionId="qst._id"
                 />
             </ul>
 
@@ -18,17 +18,19 @@
             <form>
                 <ul>
                     <ranged-quizz-line v-for="item in getRange"
-                            v-bind:phraseOne="'фраза1 вопрос'+item"
-                            v-bind:phraseTwo="'фраза2 вопрос'+item"
+                                       v-bind:phraseOne="'фраза1 вопрос'+item"
+                                       v-bind:phraseTwo="'фраза2 вопрос'+item"
+                                       v-bind:questionId="item"
                     />
                 </ul>
+
+                <button v-on:click.prevent="sendResults">Send</button>
             </form>
         </div>
     </div>
 </template>
 
 <script>
-
 
     export default {
         name: 'Harris',
@@ -50,7 +52,9 @@
         created() {
             let vm = this;
             // Fetch our array of posts from an API
-            fetch(this.$data.url)
+            fetch(this.$data.url, {
+                method: 'GET'
+            })
                 .then(function (response) {
                     return response.json()
                 })
@@ -62,13 +66,33 @@
         },
         methods: {
             sendResults() {
-                const requester = new Request(this.data.url, {
+                const collectAnswers = () => {
+                    return [];
+                };
+
+                const request = new Request(this.$data.url, {
                     method: 'POST',
-                    body: ''
+                    body: collectAnswers(),
                 });
 
-                alert('Sent! You\'ll be redirected.');
-                window.location.href = '/#';
+                fetch(request)
+                    .then(response => {
+                        if (response.status === 200) {
+                            return response.json();
+                        } else {
+                            throw new Error('Что-то случилось с API сервером!');
+                        }
+                    })
+                    .then(response => {
+                        console.debug(response);
+
+                        alert('Sent! You\'ll be redirected.');
+                        window.location.href = '/#';
+                    })
+                    .catch(error => {
+                        console.error(error);
+                        alert('AAAAA! Error эгэйн! Настройки виноваты!');
+                    });
             }
         }
     }
@@ -79,9 +103,11 @@
         background-color: red;
         color: white;
     }
+
     ul {
         padding-inline-start: 0;
     }
+
     .row {
         padding-bottom: 5px;
         border-bottom: 1px lightgray solid;

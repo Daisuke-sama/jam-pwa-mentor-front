@@ -4,9 +4,12 @@
             <li>{{ phraseOne }}</li>
 
             <li v-for="item in getRange">
+
                 <input type="radio"
-                       v-bind:name="'quiestion-'+questionId"
-                       v-bind:value="item" />
+                       v-bind:name="'question-'+questionId"
+                       v-bind:value="item"
+                />
+
             </li>
 
             <li>{{ phraseTwo }}</li>
@@ -26,7 +29,7 @@
             getRange() {
                 Array.range = (start, end) => Array.from({length: (end - start)}, (v, k) => k + start);
 
-                return Array.range(-3,3);
+                return Array.range(-3, 3);
             }
         }
     }
