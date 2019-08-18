@@ -47,24 +47,33 @@
                 Array.range = (start, end) => Array.from({length: (end - start)}, (v, k) => k + start);
 
                 return Array.range(1, 10);
-            }
+            },
         },
         created() {
-            let vm = this;
-            // Fetch our array of posts from an API
-            fetch(this.$data.url, {
-                method: 'GET'
-            })
-                .then(function (response) {
-                    return response.json()
-                })
-                .then(function (data) {
-                    vm.$data.name = data.name;
-                    vm.$data.questions = data.questions;
-                    vm.$data.person_id = data.person_id;
-                })
+            this.getQuestions();
         },
         methods: {
+            getQuestions() {
+                console.log('started');
+                let vm = this;
+                let quests = '';
+
+                const request = async () => {
+                    const response = await fetch(this.$data.url);
+                    const data = await response.json();
+
+                    vm.$data.name = data.name;
+                    quests = data.questions;
+                    vm.$data.person_id = data.person_id;
+                };
+
+                request();
+
+                console.log('ended');
+                console.log(quests);
+
+                return quests;
+            },
             sendResults() {
                 const collectAnswers = () => {
                     return [];
@@ -91,7 +100,7 @@
                     })
                     .catch(error => {
                         console.error(error);
-                        alert('AAAAA! Error эгэйн! Настройки виноваты!');
+                        alert('AAAAA! Error эгэйн! Настройки!');
                     });
             }
         }
