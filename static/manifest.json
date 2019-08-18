@@ -1,0 +1,11 @@
+{
+  "short_name": "JamPwaMentor",
+  "name": "The app for finding pairs of mentors and mentees.",
+  "icons": [
+  ],
+  "start_url": "/?utm_source=test",
+  "background_color": "#FFFFFF",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#FFFFFF"
+}

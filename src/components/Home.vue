@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Главная</h1>
+        <h1>{{ this.headline }}</h1>
     </div>
 </template>
 
@@ -11,4 +11,11 @@
 </style>
 
 <script>
+    export default {
+        data: function() {
+            return {
+                headline: "Главная"
+            }
+        }
+    }
 </script>
