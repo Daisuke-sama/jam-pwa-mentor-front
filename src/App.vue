@@ -12,25 +12,36 @@
 </template>
 
 <style scoped>
+    #app {
+        font-family: 'Avenir', Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-align: center;
+        color: #2c3e50;
+        margin-top: 60px;
+    }
+
     ul {
-        list-style: none;
-        display: flex;
+        list-style-type: none;
         padding: 0;
+        display: flex;
     }
+
     li {
-        padding: 5px 15px 5px 0;
+        display: inline-block;
+        margin: 0 10px;
     }
-    li a {
-        text-decoration: none;
-        color: black;
-    }
-    li a:hover {
-        color: #404040;
+
+    a {
+        color: #42b983;
     }
 </style>
 
 <script>
     export default {
+        components: {
+
+        },
         data: () => ({
             links: [
                 {
@@ -50,6 +61,13 @@
                     to: '/404-url'
                 }
             ]
-        })
+        }),
+        methods: {
+            goBack () {
+                window.history.length > 1
+                    ? this.$router.go(-1)
+                    : this.$router.push('/')
+            }
+        }
     }
 </script>
