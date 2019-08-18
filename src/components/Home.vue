@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>{{ name }}</h1>
+        <h1>Главная</h1>
     </div>
 </template>
 
@@ -11,7 +11,4 @@
 </style>
 
 <script>
-    export default {
-        name: "Главная"
-    }
 </script>

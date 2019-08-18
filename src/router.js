@@ -21,8 +21,8 @@ export default new Router({
             component: Quizzes
         },
         {
+            path: '/filters/quizzes/harris',
             name: 'Модифицированная Шкала Пирс-Харрис',
-            to: '/filters/quizzes/harris',
             component: Harris
         },
         {

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>{{ name }}</h1>
+        <h1>Страница не найдена</h1>
     </div>
 </template>
 
@@ -11,7 +11,4 @@
 </style>
 
 <script>
-    export default {
-        name: "PageNotFound"
-    }
 </script>

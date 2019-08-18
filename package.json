@@ -4,6 +4,9 @@
   "description": "The app for finding pairs of mentors and mentees.",
   "main": "index.js",
   "scripts": {
+    "build": "webpack -p --mode production",
+    "build:dev": "webpack -d --mode development",
+    "dev": "webpack-dev-server --progress",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Pavel Burylichau",

@@ -1,13 +1,10 @@
 <template>
     <div>
-        <h1>{{ name }}</h1>
+        <h1>Доступные квизы</h1>
     </div>
 </template>
 
 <script>
-    export default {
-        name: "Доступные квизы"
-    }
 </script>
 
 <style scoped>
