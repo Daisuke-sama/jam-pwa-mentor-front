@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import Quizzes from '@/components/Filters/Quizzes';
+import Quizzes from '@/components/Filters/Quizzes/Quizzes';
 import Harris from '@/components/Filters/Quizzes/Harris';
 import Home from '@/components/Home';
 import PageNotFound from '@/components/PageNotFound';
